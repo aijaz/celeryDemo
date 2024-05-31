@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  my_app_c:
+    image: my_app_i
+
+  my_rabbitmq_c:
+    image: my_rabbitmq_i
+    ports:
+      - 5672:5672
+
+  my_worker_c:
+    image: my_worker_i
+    depends_on:
+      - my_rabbitmq_c
+
+  my_postgres_c:
+      image: my_postgres_i
+      ports:
+         - 5432:5432
+      volumes:
+         -  /tmp/pg_data:/var/lib/postgresql/data
+      environment:
+         - POSTGRES_PASSWORD='mysecretpassword'
