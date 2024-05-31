@@ -1,5 +1,12 @@
-from time import sleep
+import signal
+import sys
 
-while True:
-    sleep(10)
-    pass
+
+def sigterm_handler(*_):
+    print('SIGTERM Received!')
+    sys.exit(0)
+
+
+signal.signal(signal.SIGTERM, sigterm_handler)
+print('Waiting for SIGTERM')
+signal.pause()

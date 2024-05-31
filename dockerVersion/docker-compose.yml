@@ -3,6 +3,8 @@ version: '3'
 services:
   my_app_c:
     image: my_app_i
+    command:
+      - app/dummy.py
 
   my_rabbitmq_c:
     image: my_rabbitmq_i
