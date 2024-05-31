@@ -5,9 +5,15 @@ app = Celery('celery_worker',
              broker='pyamqp://guest:guest@my_rabbitmq_c//',
              backend='db+postgresql://cloe:cloe@my_postgres_c/cloedb')
 
+results = []
+
 
 def status():
-    print("TODO: implement status")
+    for n, result in results:
+        if result.ready():
+            print(f"fib{n}: {result.get()}")
+        else:
+            print(f"fib{n}: ???")
 
 
 if __name__ == '__main__':
@@ -20,4 +26,4 @@ if __name__ == '__main__':
         else:
             n = int(cmd)
             result = fib_task.delay(n)
-            print(result)
+            results.append((n, result))
