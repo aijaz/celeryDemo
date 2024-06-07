@@ -1,5 +1,6 @@
 from celery import Celery
 from celery_worker import fib_task
+# from celery_worker import fib_dp_task
 
 app = Celery('celery_worker',
              broker='pyamqp://guest:guest@my_rabbitmq_c//',
@@ -23,7 +24,12 @@ if __name__ == '__main__':
             break
         elif cmd == "s":
             status()
+        # elif cmd == "d":
+        #     n = int(old_cmd)
+        #     result = fib_dp_task.delay(n)
+        #     results.append((n, result))
         else:
+            old_cmd = int(cmd)
             n = int(cmd)
             result = fib_task.delay(n)
             results.append((n, result))

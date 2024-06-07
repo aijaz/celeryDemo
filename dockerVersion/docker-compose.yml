@@ -16,6 +16,16 @@ services:
     depends_on:
       - my_rabbitmq_c
 
+  my_worker_c_2:
+    image: my_worker_i
+    depends_on:
+      - my_rabbitmq_c
+
+  my_worker_c_3:
+    image: my_worker_i
+    depends_on:
+      - my_rabbitmq_c
+
   my_postgres_c:
       image: my_postgres_i
       ports:
